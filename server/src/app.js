@@ -34,6 +34,13 @@ app.use(
 app.use(express.json());
 app.use(cookieParser());
 
+app.get("/health", (req, res) => {
+  res.status(200).json({
+    status: "ok",
+    message: "DevMesh server is running",
+  });
+});
+
 app.use("/", authRouter);
 app.use("/", profileRouter);
 app.use("/", requestRouter);
@@ -45,6 +52,7 @@ const PORT = process.env.PORT || 7777;
 connectDb()
   .then(() => {
     console.log("Database connected successfully!");
+
     server.listen(PORT, () => {
       console.log(`App is running on the port ${PORT}...`);
     });

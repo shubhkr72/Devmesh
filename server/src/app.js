@@ -2,38 +2,34 @@ import "dotenv/config";
 import express from "express";
 import connectDb from "./config/database.js";
 import cookieParser from "cookie-parser";
-import cors from "cors";
-import { createServer } from "http";
-import { Server } from "socket.io";
-
 import authRouter from "./routes/auth.js";
 import profileRouter from "./routes/profile.js";
 import requestRouter from "./routes/request.js";
 import userRouter from "./routes/user.js";
-import chatRouter from "./routes/chat.js";
+import cors from "cors";
+import { createServer } from "http";
+import { Server } from "socket.io";
 import handleConnection from "./socket/handleConnection.js";
+import chatRouter from "./routes/chat.js";
 
 const app = express();
 const server = createServer(app);
 
-const CLIENT_URL =
-  process.env.CLIENT_URL || "http://localhost:5173";
-
 const corsOptions = {
-  origin: CLIENT_URL,
+  origin: process.env.CLIENT_URL || "http://localhost:5173",
   credentials: true,
 };
-
-app.use(cors(corsOptions));
-
-app.use(express.json());
-app.use(cookieParser());
 
 const io = new Server(server, {
   cors: corsOptions,
 });
 
 handleConnection(io);
+
+app.use(cors(corsOptions));
+
+app.use(express.json());
+app.use(cookieParser());
 
 app.get("/health", (req, res) => {
   res.status(200).json({
@@ -63,9 +59,9 @@ connectDb()
     console.log("Database connected successfully!");
 
     server.listen(PORT, () => {
-      console.log(`App is running on port ${PORT}...`);
+      console.log(`App is running on the port ${PORT}...`);
     });
   })
-  .catch((error) => {
-    console.error("Database connection error:", error);
+  .catch((err) => {
+    console.error("Error:", err);
   });

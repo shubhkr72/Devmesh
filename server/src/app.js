@@ -17,8 +17,7 @@ const app = express();
 const server = createServer(app);
 
 const CLIENT_URL =
-  process.env.CLIENT_URL ||
-  "https://devmesh-sg7s-lemon.vercel.app";
+  process.env.CLIENT_URL || "http://localhost:5173";
 
 const corsOptions = {
   origin: CLIENT_URL,
@@ -26,8 +25,6 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-
-app.options("*", cors(corsOptions));
 
 app.use(express.json());
 app.use(cookieParser());
@@ -66,7 +63,7 @@ connectDb()
     console.log("Database connected successfully!");
 
     server.listen(PORT, () => {
-      console.log(`App is running on port ${PORT}`);
+      console.log(`App is running on port ${PORT}...`);
     });
   })
   .catch((error) => {

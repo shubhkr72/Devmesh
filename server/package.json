@@ -1,5 +1,5 @@
 {
-  "name": "devmesh",
+  "name": "DevMesh",
   "version": "1.0.0",
   "description": "Networking site for developers",
   "keywords": [
@@ -7,7 +7,7 @@
     "express.js"
   ],
   "license": "ISC",
-  "author": "shubham kumar",
+  "author": "Shubham Kumar",
   "type": "module",
   "main": "app.js",
   "scripts": {

@@ -20,7 +20,7 @@ export function LoginForm() {
       <div className="mb-7">
         <p className="text-sm font-semibold text-primary">Welcome back</p>
         <h2 className="mt-2 text-2xl font-semibold text-foreground">
-          Sign in to devmesh
+          Sign in to DevMesh
         </h2>
         <p className="mt-2 text-sm leading-6 text-muted-foreground">
           Continue discovering developers and managing your network.
@@ -100,7 +100,7 @@ export function LoginForm() {
 
       <div className="mt-7 border-t border-border pt-5 text-center">
         <p className="text-sm text-muted-foreground">
-          New to devmesh?{" "}
+          New to DevMesh?{" "}
           <Link
             to="/register"
             className="font-semibold text-primary transition-colors hover:text-primary/80"

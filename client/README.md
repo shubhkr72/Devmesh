@@ -1,6 +1,6 @@
-# devmesh Client
+# DevMesh Client
 
-This folder contains the React frontend for devmesh. It handles auth screens,
+This folder contains the React frontend for DevMesh. It handles auth screens,
 developer discovery, profile editing, requests, connections,
 and real-time chat.
 

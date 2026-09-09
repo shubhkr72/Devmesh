@@ -1,6 +1,6 @@
-# devmesh
+# DevMesh
 
-devmesh is a full-stack developer networking platform where developers can create profiles, discover developers, send connection requests, manage connections, and chat in real time.
+DevMesh is a full-stack developer networking platform where developers can create profiles, discover developers, send connection requests, manage connections, and chat in real time.
 
 ## Features
 
@@ -36,7 +36,7 @@ devmesh is a full-stack developer networking platform where developers can creat
 ## Project Structure
 
 ```text
-devmesh/
+DevMesh/
 ├── client/    # React + Vite frontend
 └── server/    # Express + Socket.IO backend
 ```
@@ -105,6 +105,6 @@ npm run ngrok
 
 ## Built By
 
-**shubham kumar**
+**Shubham Kumar**
 
 Built with React, Node.js, MongoDB, and Socket.IO.

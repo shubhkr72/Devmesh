@@ -1,6 +1,6 @@
-# Devmesh Backend
+# DevMesh Backend
 
-The backend for Devmesh is a RESTful API built with Node.js, Express, and MongoDB, featuring real-time communication via Socket.io.
+The backend for DevMesh is a RESTful API built with Node.js, Express, and MongoDB, featuring real-time communication via Socket.io.
 
 ## 🛠 Architecture
 

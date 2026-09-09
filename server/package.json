@@ -1,13 +1,13 @@
 {
-  "name": "devtinder",
+  "name": "devmesh",
   "version": "1.0.0",
-  "description": "Tinder for devs",
+  "description": "Networking site for developers",
   "keywords": [
     "node.js",
     "express.js"
   ],
   "license": "ISC",
-  "author": "Parshuram Bagade",
+  "author": "shubham kumar",
   "type": "module",
   "main": "app.js",
   "scripts": {

@@ -7,7 +7,7 @@ import {
   UserPlus,
 } from "lucide-react";
 
-export const PLATFORM_NAME = "Codemesh";
+export const PLATFORM_NAME = "devmesh";
 
 export const PLATFORM_TAGLINE =
   "The developer network for finding collaborators, growing your circle, and chatting.";

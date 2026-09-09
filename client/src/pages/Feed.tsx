@@ -92,7 +92,7 @@ const Feed = () => {
               <p className="mt-2 text-sm text-muted-foreground">
                 {isSearching
                   ? `Looking for @${searchQuery.trim()}...`
-                  : "Pulling the latest profiles from codemesh."}
+                  : "Pulling the latest profiles from devmesh."}
               </p>
             </CardContent>
           </Card>
@@ -136,7 +136,7 @@ const Feed = () => {
               <p className="mx-auto mt-3 max-w-lg text-sm leading-6 text-muted-foreground">
                 {isSearching
                   ? `No profile matches "@${searchQuery.trim()}". Try a different username or clear the search.`
-                  : "You have reviewed the available developers. Check connections, update your profile, or come back when new builders join codemesh."}
+                  : "You have reviewed the available developers. Check connections, update your profile, or come back when new builders join devmesh."}
               </p>
 
               <div className="mt-7 flex flex-col justify-center gap-3 sm:flex-row">

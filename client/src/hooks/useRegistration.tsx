@@ -52,7 +52,7 @@ const useRegistration = () => {
         return;
       }
       dispatch(setUserInfo(response.data.user));
-      toast.success("Welcome to codemesh!", {
+      toast.success("Welcome to devmesh!", {
         description: `Hi ${name}! Let's complete your profile to get started.`,
       });
       navigate("/profile");

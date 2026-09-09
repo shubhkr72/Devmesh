@@ -1,6 +1,6 @@
-# codemesh Backend
+# Devmesh Backend
 
-The backend for codemesh is a RESTful API built with Node.js, Express, and MongoDB, featuring real-time communication via Socket.io.
+The backend for Devmesh is a RESTful API built with Node.js, Express, and MongoDB, featuring real-time communication via Socket.io.
 
 ## 🛠 Architecture
 
@@ -12,7 +12,6 @@ The server follows a modular Controller-Route-Model pattern to ensure scalabilit
 - `src/constants.js`: Centralized constants used across the application (e.g., `USER_SAFE_DATA`).
 - `src/config/`:
   - `database.js`: MongoDB connection logic.
-  - `cloudinary.js`: Configuration for profile image uploads.
 - `src/models/`: (Mongoose Schemas)
   - `user.js`: Defines the User profile, authentication details, and basic user data.
   - `request.js`: Handles connection requests between users (Interested, Accepted, Rejected).
@@ -43,7 +42,6 @@ Stores identity and profile information.
 - `password`: Hashed password.
 - `about`: Short bio.
 - `skills`: Array of technologies.
-- `imageUrl`: Link to the profile picture.
 
 ### Request Model
 Tracks the state of a connection request.
@@ -58,5 +56,5 @@ Stores the conversation between two users.
 
 ## 🚀 Setup
 1. Install dependencies: `npm install`
-2. Configure `.env` with `MONGO_URI`, `JWT_SECRET`, and `CLOUDINARY` credentials.
+2. Configure `.env` with `MONGO_URI` and `JWT_SECRET` credentials.
 3. Start the server: `npm start` or `npm run dev`

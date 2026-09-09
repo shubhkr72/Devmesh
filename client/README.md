@@ -1,4 +1,4 @@
-# codemesh Client
+# DevMesh Client
 
 This folder contains the React frontend for codemesh. It handles auth screens,
 developer discovery, profile editing, requests, connections,

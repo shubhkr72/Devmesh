@@ -65,41 +65,41 @@ export const registerController = async (req, res) => {
 
     const { name, username, password, email } = req.body;
 
-    const foundUser = await User.findOne({ email });
+    const normalizedEmail = email.trim().toLowerCase();
+    const normalizedUsername = username.trim().toLowerCase();
+
+    const foundUser = await User.findOne({
+      $or: [
+        { email: normalizedEmail },
+        { username: normalizedUsername },
+      ],
+    });
 
     if (foundUser) {
-      return res
-        .status(401)
-        .send("Account already exists, please login!");
+      return res.status(409).json({
+        message: "Account already exists, please login!",
+      });
     }
 
     const hash = await bcrypt.hash(password, 10);
 
-    if (!hash) {
-      throw new Error("Error in password encryption!");
-    }
-
     const user = new User({
-      name,
-      username,
-      email,
+      name: name.trim(),
+      username: normalizedUsername,
+      email: normalizedEmail,
       password: hash,
     });
 
     await user.save();
 
-    const token = await user.getJWT();
-
-    if (!token) {
-      throw new Error("Token not found!");
-    }
+    const token = user.getJWT();
 
     const safeUserData = USER_SAFE_DATA.reduce((acc, key) => {
       acc[key] = user[key];
       return acc;
     }, {});
 
-    res
+    return res
       .cookie("token", token, cookieOptions)
       .status(201)
       .json({
@@ -108,9 +108,10 @@ export const registerController = async (req, res) => {
       });
   } catch (error) {
     console.error("Registration error:", error);
-    res
-      .status(400)
-      .send(error?.message || "ERROR: Something went wrong!");
+
+    return res.status(500).json({
+      message: "Something went wrong. Please try again.",
+    });
   }
 };
 

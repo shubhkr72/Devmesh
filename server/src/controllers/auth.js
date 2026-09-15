@@ -13,38 +13,54 @@ const cookieOptions = {
   maxAge: 7 * 24 * 60 * 60 * 1000,
 };
 
+import validator from "validator";
+import User from "../models/user.js";
+import { USER_SAFE_DATA} from "../constants.js";
+
 export const loginController = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    if (!validator.isEmail(email)) {
-      throw new Error("Please enter a valid email address!");
+    if (!email || !password) {
+      return res.status(400).json({
+        message: "Email and password are required!",
+      });
     }
 
-    const user = await User.findOne({ email });
+    if (!validator.isEmail(email)) {
+      return res.status(400).json({
+        message: "Please enter a valid email address!",
+      });
+    }
+
+    const normalizedEmail = email.trim().toLowerCase();
+
+    const user = await User.findOne({
+      email: normalizedEmail,
+    });
 
     if (!user) {
-      throw new Error("Invalid credentials!");
+      return res.status(401).json({
+        message: "Invalid credentials!",
+      });
     }
 
     const isValidPassword = await user.comparePasswords(password);
 
     if (!isValidPassword) {
-      throw new Error("Invalid credentials!");
+      return res.status(401).json({
+        message: "Invalid credentials!",
+      });
     }
 
-    const token = await user.getJWT();
-
-    if (!token) {
-      throw new Error("Token not found!");
-    }
+    const token = user.getJWT();
 
     const safeUserData = USER_SAFE_DATA.reduce((acc, key) => {
       acc[key] = user[key];
       return acc;
     }, {});
 
-    res
+    return res
       .cookie("token", token, cookieOptions)
       .status(200)
       .json({
@@ -53,9 +69,10 @@ export const loginController = async (req, res) => {
       });
   } catch (error) {
     console.error("Login error:", error);
-    res
-      .status(400)
-      .send(error?.message || "ERROR: Something went wrong!");
+
+    return res.status(500).json({
+      message: "Something went wrong. Please try again.",
+    });
   }
 };
 

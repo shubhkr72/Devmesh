@@ -15,10 +15,6 @@ profileRouter.get("/profile", checkAuth, getProfileController);
 
 profileRouter.patch("/profile/edit", checkAuth, editProfileController);
 
-profileRouter.patch(
-  "/profile/changePassword",
-  checkAuth,
-  changePasswordController
-);
+profileRouter.patch("/profile/changePassword", checkAuth, changePasswordController);
 
 export default profileRouter;

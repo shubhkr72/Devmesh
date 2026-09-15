@@ -4,32 +4,31 @@ import User from "../models/user.js";
 const checkAuth = async (req, res, next) => {
   try {
     const { token } = req.cookies;
-    let user = null;
 
-    if (token) {
-      try {
-        const decodedData = await jwt.verify(token, process.env.JWT_SECRET);
-        const { _id } = decodedData;
-        if (_id) {
-          user = await User.findById(_id);
-        }
-      } catch (err) {
-        // Token invalid, continue to check for userId
-      }
+    if (!token) {
+      return res.status(401).json({
+        message: "Authentication required",
+      });
     }
 
+    const decodedData = jwt.verify(token, process.env.JWT_SECRET);
+
+    const user = await User.findById(decodedData._id);
+
     if (!user) {
-      const userId = req.query.userId || req.body.userId;
-      if (userId) {
-        user = await User.findById(userId);
-      }
+      return res.status(401).json({
+        message: "User not found",
+      });
     }
 
     req.user = user;
     next();
   } catch (error) {
-    console.error("Auth middleware error: ", error.message);
-    next(); // Continue anyway to make it public
+    console.error("Auth middleware error:", error.message);
+
+    return res.status(401).json({
+      message: "Invalid or expired token",
+    });
   }
 };
 

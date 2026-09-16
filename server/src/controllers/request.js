@@ -13,14 +13,14 @@ export const sendRequestController = async (req, res) => {
 
     const senderId = req.user._id;
 
-    const exhistingRequest = await Request.findOne({
+    const existingRequest = await Request.findOne({
       $or: [
         { sender: senderId, receiver: receiverId },
         { sender: receiverId, receiver: senderId },
       ],
     });
 
-    if (exhistingRequest)
+    if (existingRequest)
       return res.status(400).json({ message: "Request already present!" });
 
     const requestData = {
@@ -33,7 +33,7 @@ export const sendRequestController = async (req, res) => {
 
     await request.save();
 
-    return res.json({ message: "Request successfull!" });
+    return res.json({ message: "Request succesfull!" });
   } catch (error) {
     res.status(400).json({ message: "ERROR: " + error?.message });
   }

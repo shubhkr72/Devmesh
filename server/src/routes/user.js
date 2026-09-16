@@ -9,11 +9,7 @@ import {
 
 const userRouter = express.Router();
 
-userRouter.get(
-  "/user/requests/received",
-  checkAuth,
-  getReceivedRequestsController
-);
+userRouter.get("/user/requests/received", checkAuth, getReceivedRequestsController);
 
 userRouter.get("/user/connections", checkAuth, getUserConnectionsController);
 
